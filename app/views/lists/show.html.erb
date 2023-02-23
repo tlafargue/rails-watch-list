@@ -2,6 +2,14 @@
 <h1><%= @list.name %></h1>
 <ul>
   <% @list.bookmarks.each do |bookmark| %>
-    <li><%= bookmark.comment %> | <%= link_to bookmark.movie.title, '#' %></li>
+    <li><%= bookmark.comment %> | <%= link_to bookmark.movie.title, "##{bookmark.movie.title.gsub(/[\s']+/, "-")}" %></li>
   <% end %>
 </ul>
+
+<div class="cards">
+  <% @list.bookmarks.each do |bookmark| %>
+    <div id="<%= bookmark.movie.title.gsub(/[\s']+/, "-") %>" class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= bookmark.movie.poster_url %>)">
+      <%= bookmark.movie.title %> (<%= bookmark.movie.rating %>)
+    </div>
+  <% end %>
+</div>
